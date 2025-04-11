@@ -1,5 +1,5 @@
 body {
-    background-image: url('https://source.unsplash.com/1600x900/?travel,beach'); /* Travel-themed background image */
+    background-image: url('https://source.unsplash.com/1600x900/?travel,beach'); 
     background-size: cover;
     background-position: center;
     color: white;
@@ -11,7 +11,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay to make the text stand out */
+    background-color: rgba(0, 0, 0, 0.5); 
 }
 
 .container {
@@ -23,7 +23,7 @@ body {
 .card {
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    background-color: rgba(255, 255, 255, 0.8); /* Transparent card background */
+    background-color: rgba(255, 255, 255, 0.8); 
 }
 
 .form-container {
@@ -74,7 +74,6 @@ body {
     border-radius: 8px;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
     .container {
         padding-top: 50px;
