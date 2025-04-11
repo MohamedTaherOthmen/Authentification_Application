@@ -87,7 +87,7 @@ if (isset($_POST['signup'])) {
                 VALUES (:first_name, :last_name, :email, :phone_number, :country, :hashed_password, :currentDateTime)";
         
         $stmt = $connect->prepare($sql);
-
+        
         // Bind parameters correctly
         $stmt->bindParam(':first_name', $first_name);
         $stmt->bindParam(':last_name', $last_name);
