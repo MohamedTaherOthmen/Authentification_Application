@@ -1,21 +1,27 @@
-<?php 
-    $connect = require './connection.php';
-    if (isset($_POST['login'])){
-        $email              = $_POST['email'];
-        $password           = $_POST['password'];
-        $hashed_password    = password_hash($password, PASSWORD_DEFAULT);
+<?php
+$connect = require './connection.php';
 
-        try{
-            $sql = "SELECT * FROM tourist WHERE email = $email AND password_hash = $hashed_password";
-            $stmt = $connect->query($sql);
-            if($stmt){
-                echo "User Found";
-            }else{
-                echo"please create account";
-            }
-        }catch (PDOException $e){
-            echo "ERROR : " . $e->getMessage();
-            die();
+if (isset($_POST['login'])) {
+    $email = trim($_POST['email']);
+    $password = $_POST['password'];
+
+    try {
+        $sql = "SELECT * FROM tourist WHERE email = :email";
+        $stmt = $connect->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user && password_verify($password, $user['password_hash'])) {
+            echo "✅ Welcome, " . htmlspecialchars($user['first_name']) . "!";
+        } else {
+            echo "❌ Incorrect email or password. Please try again.";
         }
+
+    } catch (PDOException $e) {
+        echo "🚨 ERROR: " . $e->getMessage();
+        die();
     }
+}
 ?>
