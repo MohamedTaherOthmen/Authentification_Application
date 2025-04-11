@@ -1,3 +1,41 @@
+<?php
+    $connect = require './connection.php';
+
+    if (isset($_POST['signup'])) {
+        $first_name     = $_POST['first_name'];
+        $last_name      = $_POST['last_name'];
+        $email          = $_POST['email'];
+        $password       = $_POST['password'];
+        $phone_number   = $_POST['phone-number'];
+        $country        = $_POST['country'];
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $currentDateTime = date('Y-m-d H:i:s');
+
+        try {
+            $sql = "INSERT INTO tourist (first_name, last_name, email, phone_number, country, password_hash, created_at) 
+                    VALUES (:first_name, :last_name, :email, :phone_number, :country, :hashed_password, :currentDateTime)";
+            
+            $stmt = $connect->prepare($sql);
+            
+            // Bind parameters correctly
+            $stmt->bindParam(':first_name', $first_name);
+            $stmt->bindParam(':last_name', $last_name);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':phone_number', $phone_number);
+            $stmt->bindParam(':country', $country);
+            $stmt->bindParam(':hashed_password', $hashed_password);
+            $stmt->bindParam(':currentDateTime', $currentDateTime);
+
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            die();
+        }
+    } else {
+        echo "<br> Nothing Happened !!";
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,47 +100,8 @@
             <img src="../frontend/img/image.png" alt="Thank You Image">
             <h1>Thank You!</h1>
             <p>Your form has been submitted successfully. We appreciate your input!</p>
-            <a href="../frontend/form.html" class="btn">Go Back to Form</a>
+            <a href="../frontend/login.html" class="btn">Login Here</a>
         </div>
         <br>
     </div>
 </body>
-</html>
-
-<?php
-require './connection.php';
-
-if (isset($_POST['signup'])) {
-    $first_name     = $_POST['first_name'];
-    $last_name      = $_POST['last_name'];
-    $email          = $_POST['email'];
-    $password       = $_POST['password'];
-    $phone_number   = $_POST['phone-number'];
-    $country        = $_POST['country'];
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-    $currentDateTime = date('Y-m-d H:i:s');
-
-    try {
-        $sql = "INSERT INTO tourist (first_name, last_name, email, phone_number, country, password_hash, created_at) 
-                VALUES (:first_name, :last_name, :email, :phone_number, :country, :hashed_password, :currentDateTime)";
-        
-        $stmt = $connect->prepare($sql);
-        
-        // Bind parameters correctly
-        $stmt->bindParam(':first_name', $first_name);
-        $stmt->bindParam(':last_name', $last_name);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':phone_number', $phone_number);
-        $stmt->bindParam(':country', $country);
-        $stmt->bindParam(':hashed_password', $hashed_password);
-        $stmt->bindParam(':currentDateTime', $currentDateTime);
-
-        $stmt->execute();
-        echo "User registered successfully!";
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-    }
-} else {
-    echo "<br> Nothing Happened";
-}
-?>

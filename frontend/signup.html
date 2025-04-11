@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TuniSights - Sign Up</title>
+    <link rel="stylesheet" href="./css/signup.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Background -->
+    <div class="background"></div>
+    <div class="overlay"></div>
+
+    <!-- Sign Up Form -->
+    <div class="signup-container">
+        <div class="signup-card">
+            <div class="header">
+                <h2><span>Join</span> the TuniSights Family</h2>
+                <p class="lead">Create your account to explore the best tourist experiences!</p>
+            </div>
+            <form action="../backend/signup.php" method="post">
+                <div class="form-group">
+                    <label for="fN" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="fN" name="first_name" required />
+                </div>
+                <div class="form-group">
+                    <label for="lN" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="lN" name="last_name" required />
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" name="email" required />
+                    <div class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="form-group">
+                    <label for="pass" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="pass" name="password" required />
+                </div>
+                <div class="form-group">
+                    <label for="phone-number" class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control" id="phone-number" name="phone-number" pattern="[0-9]{8}" placeholder="99-999-999" required />
+                    <small class="form-text">Enter your 8-digit phone number.</small>
+                </div>
+                <div class="form-group">
+                    <label for="country" class="form-label">Country</label>
+                    <input type="text" class="form-control" id="country" name="country" required />
+                </div>
+                <button type="submit" name="signup" class="btn-custom">Create Account</button>
+            </form>
+            <div class="footer">
+                <p>Already have an account? <a href="../frontend/login.html">Login here</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
