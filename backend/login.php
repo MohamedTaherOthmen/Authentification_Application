@@ -19,7 +19,7 @@ if (isset($_POST['login'])) {
             echo "❌ Incorrect email or password. Please try again.";
         }
 
-    } catch (PDOException $e) {
+    }catch(PDOException $e) {
         echo "🚨 ERROR: " . $e->getMessage();
         die();
     }
